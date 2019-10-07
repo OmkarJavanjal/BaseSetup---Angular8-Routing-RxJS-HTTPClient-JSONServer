@@ -27,7 +27,7 @@ server.use(jsonServer.bodyParser);
 
 // Simulate delay on all requests
 server.use(function(req, res, next) {
-  setTimeout(next, 000);    //add delay to simulate rela time sapi call like experiance
+  setTimeout(next, 2000);    //add delay to simulate rela time sapi call like experiance
 });
 
 // Declaring custom routes below. Add custom routes before JSON Server router

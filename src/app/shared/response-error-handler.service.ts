@@ -11,6 +11,22 @@ export class ResponseErrorHandlerService {
 
   constructor() { }
 
+  public isServiceResponseHasError(response): boolean {
+    // handle DP error returned from Service  call response
+    if (response &&
+      (response['DataPower Service Name'] ||
+        response['DataPower Error Code'] ||
+        response['Error Message'])) {
+      return true;
+    } else if (response && !response.errorMessage
+      && !response.errorCode
+      && (!response.errorList || response.errorList.length === 0)) {
+      return false ;
+    } else {
+      return true ;
+    }
+  }
+
   public handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -20,7 +36,8 @@ export class ResponseErrorHandlerService {
       // The response body may contain clues as to what went wrong,
       console.error(
         `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `body was: ${error.error}`+
+        `url was: ${error.url}`);
     }
     // return an observable with a user-facing error message
     return throwError(
