@@ -55,7 +55,7 @@ server.use((req, res, next) => {
 server.use(router);
 
 // Start server
-const port = 3003;
+const port = 3004;
 server.listen(port, () => {
   console.log(`JSON Server is running on port ${port}`);
 });
