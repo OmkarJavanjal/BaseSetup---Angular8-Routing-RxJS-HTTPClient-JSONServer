@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 
-import { ResponseErrorHandlerService } from '../response-error-handler.service';
+import { ResponseErrorHandlerService } from '../ResponseErrorHandler/response-error-handler.service';
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { catchError, map, retry } from 'rxjs/operators';
 
-import { ResponseErrorHandlerService } from '../response-error-handler.service';
+import { ResponseErrorHandlerService } from '../ResponseErrorHandler/response-error-handler.service';
+import { env } from 'src/environments/environment-loader';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,14 @@ export class WeatherServiceService {
 
   getWeather(cityName: string) {
     let configUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ cityName + '&APPID=ae88b071a4ee8a15bad2dea3c30c3c92';
-    
+    let a=  env.appWeatherURLs.getForecastUrl+ '?q=';
     // return this.httpClient.get(configUrl)
     //   .pipe(
     //     retry(3), // retry a failed request up to 3 times
     //     catchError(this.responseErrorHandler.handleError) // then handle the error
     //   );
 
-    return this.httpClient.get(configUrl)
+    return this.httpClient.get(env.mocking ? env.appWeatherURLs.getForecastUrl2 : env.appWeatherURLs.getForecastUrl + cityName)
       .pipe(
        map(
         (response: Response) => {
