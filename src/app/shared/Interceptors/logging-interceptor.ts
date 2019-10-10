@@ -14,7 +14,7 @@ export class LoggingInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const started = Date.now();
     let ok: string;
-
+    let obj;
     // extend server response observable with logging
     return next.handle(req)
       .pipe(

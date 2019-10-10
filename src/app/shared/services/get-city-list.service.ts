@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 
 import { ResponseErrorHandlerService } from '../ResponseErrorHandler/response-error-handler.service';
+import { env } from 'src/environments/environment-loader';
 
 @Injectable({
   providedIn: 'root'
@@ -15,24 +16,21 @@ export class GetCityListService {
     private responseErrorHandler: ResponseErrorHandlerService) { }
 
     getCityList(){
-      let configUrl = 'http://localhost:3004/courses';
-    
-
-      return this.httpClient.get(configUrl)
+      return this.httpClient.get(env.cityList.getcities)
       .pipe(
-       map(
-        (response: Response) => {
-          if (!this.responseErrorHandler.isServiceResponseHasError(response)) {
-            //console.log("From Service:: Requested data available");
-            return response;
-          } else {
-            // console.log("From Service:: Service returned error with 200");
-            throw response;
+        map(
+          (response: Response) => {
+            if (!this.responseErrorHandler.isServiceResponseHasError(response)) {
+              //console.log("From Service:: Requested data available");
+              return response;
+            } else {
+              // console.log("From Service:: Service returned error with 200");
+              throw response;
+            }
           }
-        }
       ),   
       catchError((error: any) => {
-        error.url = configUrl;
+        error.url = env.cityList.getcities;
         //console.log("Inside Catch Handler");
         return this.responseErrorHandler.handleError(error); })
       );

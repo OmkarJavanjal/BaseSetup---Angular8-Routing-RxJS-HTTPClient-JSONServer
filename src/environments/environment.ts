@@ -1,16 +1,36 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+import { AppWeatherURLs } from './urlFactory/appWeatherURLs';
+import { CityListURL } from './urlFactory/city-list';
+
+export class Environment {
+  constructor(
+              private baseUrl: string,
+              private mockUrl: string,
+              private envName: string,
+              private mockingSet: boolean,
+              private prodState: boolean,
+              private proxyState: boolean,
+              private token: string
+              ) {
+  }
+
+  getEnv() {
+    return {
+      //Common Application parameters
+      production: this.prodState,
+      mocking: this.mockingSet,
+      envName: this.envName,
+      baseUrl: this.baseUrl,
+      mockUrl: this.mockUrl,
+      proxyState: this.proxyState,
+      token: this.token,
+
+      //New way to incorporate the services
+      appWeatherURLs: new AppWeatherURLs(this.baseUrl, this.mockUrl, this.envName).getUrls(),
+      cityList: new CityListURL(this.baseUrl, this.mockUrl, this.envName).getUrls()
+    };
+  }
+}
 
 export const environment = {
   production: false
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

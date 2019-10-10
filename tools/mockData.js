@@ -9,7 +9,7 @@ const courses = [
   }
 ];
 
-const authors = [
+const logs = [
   { id: 1, name: "Omkar" }
 ];
 
@@ -1407,7 +1407,7 @@ const cities = {
 // Using CommonJS style export so we can consume via Node (without using Babel-node)
 module.exports = {
   courses,
-  authors,
+  logs,
   forecast,
   cities
 };

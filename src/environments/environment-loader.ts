@@ -1,4 +1,4 @@
-import {Environment} from './environment.prod'
+import {Environment} from './environment'
 
 export class EnvironmentLoader {
 

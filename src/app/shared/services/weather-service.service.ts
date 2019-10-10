@@ -15,8 +15,7 @@ export class WeatherServiceService {
               private responseErrorHandler: ResponseErrorHandlerService) { }
 
   getWeather(cityName: string) {
-    let configUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ cityName + '&APPID=ae88b071a4ee8a15bad2dea3c30c3c92';
-    let a=  env.appWeatherURLs.getForecastUrl+ '?q=';
+    //let configUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ cityName + '&APPID=ae88b071a4ee8a15bad2dea3c30c3c92';
     // return this.httpClient.get(configUrl)
     //   .pipe(
     //     retry(3), // retry a failed request up to 3 times
@@ -37,7 +36,7 @@ export class WeatherServiceService {
         }
       ),   
       catchError((error: any) => {
-        error.url = configUrl;
+        error.url = env.mocking ? env.appWeatherURLs.getForecastUrl2 : env.appWeatherURLs.getForecastUrl + cityName;
         //console.log("Inside Catch Handler");
         return this.responseErrorHandler.handleError(error); })
       );
