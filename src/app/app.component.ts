@@ -22,7 +22,7 @@ export class AppComponent implements OnInit{
     // this.getCityListService.getCityList().subscribe(data => console.log('city data', data));
 
 
-    this.genericService.getServiceResponse(env.mocking? env.appWeatherURLs.getForecastUrl2 : env.appWeatherURLs.getForecastUrl,'Pune').subscribe(data => console.log('weather data', data));
-    this.genericService.getServiceResponse(env.cityList.getcities).subscribe(data => console.log('city data', data));
+    // this.genericService.getServiceResponse(env.mocking? env.appWeatherURLs.getForecastUrl2 : env.appWeatherURLs.getForecastUrl,'Pune').subscribe(data => console.log('weather data', data));
+    // this.genericService.getServiceResponse(env.cityList.getcities).subscribe(data => console.log('city data', data));
   }
 }
